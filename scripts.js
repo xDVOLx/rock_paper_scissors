@@ -3,6 +3,10 @@ let playerWins = 0;
 let computerWins = 0;
 const roundResults = document.getElementById('resultsArea');
 
+const roundResultText = document.createElement('p')
+roundResultText.textContent = '';
+roundResults.appendChild(roundResultText);
+
 const playerScore = document.createElement('p');
 playerScore.textContent = `Player Score: ${playerWins}`;
 roundResults.appendChild(playerScore);
@@ -11,9 +15,11 @@ const computerScore = document.createElement('p');
 computerScore.textContent = `Computer Score: ${computerWins}`;
 roundResults.appendChild(computerScore);
 
-function updateScores() { //to be called on button press after playRound()
+
+function updateScoreboard() { //to be called on button press after playRound()
     playerScore.textContent = `Player Score: ${playerWins}`;
     computerScore.textContent = `Computer Score: ${computerWins}`;
+    roundResultText.textContent = roundWinner;
 };
 
 //__________COMPUTER CHOICE____________
@@ -67,8 +73,8 @@ rockButton.textContent = "Rock";
 rockButton.addEventListener('click', () => {
     playerSelection = "rock";
     computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
-    updateScores();
+    roundWinner = playRound(playerSelection, computerSelection);
+    updateScoreboard();
 });
 playerChoices.appendChild(rockButton);
 
@@ -77,8 +83,8 @@ paperButton.textContent = "Paper";
 paperButton.addEventListener('click', () => {
     playerSelection = "paper";
     computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
-    updateScores();
+    roundWinner = playRound(playerSelection, computerSelection);
+    updateScoreboard();
 });
 playerChoices.appendChild(paperButton);
 
@@ -87,7 +93,7 @@ scissorsButton.textContent = "Scissors";
 scissorsButton.addEventListener('click', () => {
     playerSelection = "scissors";
     computerSelection = getComputerChoice();
-    playRound(playerSelection, computerSelection);
-    updateScores();
+    roundWinner = playRound(playerSelection, computerSelection);
+    updateScoreboard();
 });
 playerChoices.appendChild(scissorsButton);
