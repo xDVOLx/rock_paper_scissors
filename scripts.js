@@ -1,3 +1,8 @@
+//__________SCORES____________
+let playerScore = 0
+let computerScore = 0
+
+//__________COMPUTER CHOICE____________
 function getComputerChoice() {
     let randomNum = Math.floor(Math.random() * 3) + 1;
     if (randomNum === 1) {
@@ -9,20 +14,7 @@ function getComputerChoice() {
     }
 }
 
-function getPlayerChoice() {
-    let playerChoice = parseInt(prompt("Enter 1 to play Rock, 2 to play Paper, or 3 to player Scissors"));
-    if (playerChoice === 1) {
-        return "rock"
-    } else if (playerChoice === 2) {
-        return "paper"
-    } else if (playerChoice === 3) {
-        return "scissors"
-    }
-}
-
-let playerScore = 0
-let computerScore = 0
-
+//_________GAME LOGIC____________
 function playRound(playerSelection, computerSelection) {
     console.log(`computer chose ${computerSelection}`)
     console.log(`player chose ${playerSelection}`)
@@ -50,23 +42,35 @@ function playRound(playerSelection, computerSelection) {
     } else if (playerSelection === "scissors" && computerSelection === "paper") {
         playerScore++
         return "Scissors cut Paper. Player wins!"
-    }
-}
+    };
+};
 
-function playGame(rounds) {
-    let round = 0;
-    function playRoundWithDelay() {
-        if (round < rounds) {
-            let playerSelection = getPlayerChoice();
-            let computerSelection = getComputerChoice();
-            console.log(playRound(playerSelection, computerSelection));
-            round++;
-            setTimeout(playRoundWithDelay, 1000);
-        } else {
-            console.log(`Final Score\n Player: ${playerScore}\n Computer ${computerScore}`)
-        }
-    }
-    playRoundWithDelay();
-}
+//__________PLAYER CHOICE BUTTONS____________
+const playerChoices = document.getElementById('playerChoiceBtns');
 
-playGame(5);
+const rockButton = document.createElement('button');
+rockButton.textContent = "Rock";
+playerChoices.appendChild(rockButton);
+rockButton.addEventListener('click', () => {
+    playerSelection = "rock";
+    computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+});
+
+const paperButton = document.createElement('button');
+paperButton.textContent = "Paper";
+playerChoices.appendChild(paperButton);
+paperButton.addEventListener('click', () => {
+    playerSelection = "paper";
+    computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+});
+
+const scissorsButton = document.createElement('button');
+scissorsButton.textContent = "Scissors";
+playerChoices.appendChild(scissorsButton);
+scissorsButton.addEventListener('click', () => {
+    playerSelection = "scissors";
+    computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+});
