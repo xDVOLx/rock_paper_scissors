@@ -22,6 +22,22 @@ function updateScoreboard() { //to be called on button press after playRound()
     roundResultText.textContent = roundWinner;
 };
 
+function isGameOver() {
+    if (playerWins === 5) {
+        alert("Player has won 5 matches! You win!\nPress 'ok' to play again.");
+        playerWins = 0;
+        computerWins = 0;
+        roundWinner = '';
+        updateScoreboard();
+    } else if (computerWins === 5) {
+        alert("Computer has won 5 matches! You lose!\nPress 'ok' to try again.");
+        playerWins = 0;
+        computerWins = 0;
+        roundWinner = '';
+        updateScoreboard();
+    };
+};
+
 //__________COMPUTER CHOICE____________
 function getComputerChoice() {
     let randomNum = Math.floor(Math.random() * 3) + 1;
@@ -75,6 +91,7 @@ rockButton.addEventListener('click', () => {
     computerSelection = getComputerChoice();
     roundWinner = playRound(playerSelection, computerSelection);
     updateScoreboard();
+    isGameOver();
 });
 playerChoices.appendChild(rockButton);
 
@@ -85,6 +102,7 @@ paperButton.addEventListener('click', () => {
     computerSelection = getComputerChoice();
     roundWinner = playRound(playerSelection, computerSelection);
     updateScoreboard();
+    isGameOver();
 });
 playerChoices.appendChild(paperButton);
 
@@ -95,5 +113,6 @@ scissorsButton.addEventListener('click', () => {
     computerSelection = getComputerChoice();
     roundWinner = playRound(playerSelection, computerSelection);
     updateScoreboard();
+    isGameOver();
 });
 playerChoices.appendChild(scissorsButton);
